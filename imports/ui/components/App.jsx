@@ -1,15 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
- 
-import { Tasks } from '../../api/tasks.js';
-
-import Task from './Task.jsx';
-
 
 import HostJoinContainer from './HostJoinContainer.jsx';
 // App component - represents the whole app
-class App extends Component {
+export default class App extends Component {
 
   constructor(props) {
     super(props);
@@ -37,12 +32,3 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  tasks: PropTypes.array.isRequired,
-};
- 
-export default createContainer(() => {
-  return {
-    tasks: Tasks.find({}).fetch(),
-  };
-}, App);

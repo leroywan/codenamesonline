@@ -1,1 +1,43 @@
-/* CSS declarations go here */
+
+
+  input[type=range]::-webkit-slider-thumb {
+    background-color: #1565C0;
+  }
+  input[type=range]::-moz-range-thumb {
+    background-color: #1565C0;
+  }
+  input[type=range]::-ms-thumb {
+    background-color: #1565C0;
+  }
+
+  /***** These are to edit the thumb and the text inside the thumb *****/
+  input[type=range] + .thumb {
+    background-color: #1565C0;
+  }
+  input[type=range] + .thumb.active .value {
+    color: white;
+  }
+
+   /* label focus color */
+.input-field input[type=text]:focus + label {
+     color: #1565C0;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+	border-bottom: 1px solid #1565C0;
+	box-shadow: 0 1px 0 0 #1565C0;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fully-centered {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

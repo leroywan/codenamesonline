@@ -2,14 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
  
-import { Tasks } from '../../api/tasks.js';
-import Task from './Task.jsx';
 import { Session } from 'meteor/session'
 
 import Button from './Button.jsx';
 import AddNickname from './AddNickname.jsx';
 import ChooseNumOfPlayers from './ChooseNumOfPlayers.jsx';
-
+import DisplayGameCode from './DisplayGameCode.jsx';
+import EnterAccessCode from './EnterAccessCode.jsx';
 import constants from './constants.js';
 
 Session.set({
@@ -22,7 +21,7 @@ export default class HostJoinContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			stage: 0
+			stage: 1
 		}
 		this.renderHost = this.renderHost.bind(this);
 		this.renderJoin = this.renderJoin.bind(this);
@@ -65,18 +64,12 @@ export default class HostJoinContainer extends Component {
 
 		switch (this.state.stage) {
 
-			case 0: 
-				return (
-					<div>
-						<h1 style={{ textAlign: "center", fontSize: "1.2em", letterSpacing: "4px" }} >PLAY CODENAMES ONLINE</h1>
-						<Button innerText="Host a Game" setStage={ ()=> this.setStage(1) } ></Button>
-						<Button innerText="Join a Game" setStage={ ()=> this.setStage(constants.JOINSTAGE) }></Button>
-					</div>
-				)
 			case 1: 
 				return (
 					<div>
-						<AddNickname nextStage={ this.nextStage } prevStage={ this.prevStage }></AddNickname>
+						<h1 style={{ textAlign: "center", fontSize: "1.2em", letterSpacing: "4px" }} >PLAY CODENAMES ONLINE</h1>
+						<Button innerText="Host a Game" setStage={ ()=> this.setStage(2) } ></Button>
+						<Button innerText="Join a Game" setStage={ ()=> this.setStage(constants.JOINSTAGE) }></Button>
 					</div>
 				)
 			case 2: 
@@ -88,27 +81,19 @@ export default class HostJoinContainer extends Component {
 			case 3: 
 				return (
 					<div>
-						<h1>Stage 3</h1>
-						<Button innerText="Next" nextStage={ this.nextStage } ></Button>
-				        <Button innerText="Back" prevStage={ this.prevStage } ></Button>
+						<DisplayGameCode nextStage={ this.nextStage } prevStage={ this.prevStage }></DisplayGameCode>
 					</div>
 				)
 			case 4: 
 				return (
 					<div>
-						<h1>review</h1>
-						<p>Name: { nickname }</p>
-						<p>Number of Players: { numOfPlayers }</p>
-						<Button innerText="Next" nextStage={ this.nextStage } ></Button>
-				        <Button innerText="Back" prevStage={ this.prevStage } ></Button>
+						<AddNickname nextStage={ this.nextStage } prevStage={ this.prevStage }></AddNickname>
 					</div>
 				)
 			case constants.JOINSTAGE: 
 				return (
 					<div>
-						<h1>You Joined!</h1>
-						<Button innerText="Back to Main" setStage={ ()=> this.setStage(constants.MAIN) } ></Button>
-						<Button innerText="Next" nextStage={ this.nextStage } ></Button>
+						<EnterAccessCode setStage={ ()=> this.setStage(constants.MAIN) }></EnterAccessCode>
 					</div>
 				)
 		}

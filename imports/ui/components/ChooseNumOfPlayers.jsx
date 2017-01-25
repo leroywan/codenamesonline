@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Tasks } from '../../api/tasks.js';
 import { Session } from 'meteor/session'
-
+import { Gameroom } from '../../api/gameroom.js';
 import Button from './Button.jsx';
 
-export default class ChooseNumOfPlayers extends Component {
+Session.set({ gameroomID: 0 })
+class ChooseNumOfPlayers extends Component {
 
 	constructor(props) {
 		super(props);
@@ -45,7 +45,7 @@ export default class ChooseNumOfPlayers extends Component {
 				</div>
 			)
 		}
-		
+
 		return (
 			<div>
 				{ heading }
@@ -55,8 +55,14 @@ export default class ChooseNumOfPlayers extends Component {
 				    </p>
 				</form>
 		        <Button innerText="Back" prevStage={ this.props.prevStage } ></Button>
-		        <button type="button" className="btn waves-effect waves-light" onClick={ this.setNumOfPlayers } >Next</button>
+		        <button type="button" className="btn waves-effect waves-light blue darken-3" onClick={ this.setNumOfPlayers } >Next</button>
 			</div>
 		)
 	}
 }
+
+export default createContainer(() => {
+  return {
+    
+  };
+}, ChooseNumOfPlayers);

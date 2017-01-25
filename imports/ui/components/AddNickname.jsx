@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Tasks } from '../../api/tasks.js';
 import { Session } from 'meteor/session'
 
 import Button from './Button.jsx';
@@ -15,20 +14,6 @@ export default class AddNickname extends Component {
 
 		this.storeNickname = this.storeNickname.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-		this.insertTask = this.insertTask.bind(this);
-	}
-
-	insertTask() {
-		return () => {
-			Meteor.call('tasks.insert', document.getElementById('to_do').value );
-		}
-	}
-
-	resetTask() {
-		console.log('reseted task');
-		return () => {
-			Meteor.call('tasks.reset');
-		}
 	}
 
 	handleChange(event) {
@@ -71,7 +56,6 @@ export default class AddNickname extends Component {
 				        <div className="input-field col offset-s3 s6">
 				          <input data-error="Please Enter A Name" id="enter_nickname" value={ this.state.nickname } onChange={ this.handleChange } type="text" className="validate"></input>
 				          { nicknameLabel }
-				          <Button innerText="Back" prevStage={ this.props.prevStage } ></Button>
 				          <button type="button" className="btn waves-effect waves-light" onClick={ this.storeNickname } >Next</button>
 				        </div>
 				      </div>
